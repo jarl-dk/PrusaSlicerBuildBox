@@ -95,7 +95,7 @@ Vagrant.configure("2") do |config|
     git clone --depth 1 https://github.com/prusa3d/PrusaSlicer.git
   SHELL
 
-  config.vm.provision "shell", name: "build_deps", privileged: false, inline: <<-SHELL
+  config.vm.provision "shell", name: "build", privileged: false, inline: <<-SHELL
     cd PrusaSlicer
     cd deps
     mkdir build
@@ -103,10 +103,8 @@ Vagrant.configure("2") do |config|
     cmake ..
     make
     cd ../..
-  SHELL
 
-  config.vm.provision "shell", name: "build", inline: <<-SHELL
-    cd PrusaSlicer
+
     mkdir build
     cd build
     cmake .. -DSLIC3R_STATIC=1 -DSLIC3R_PCH=OFF -DCMAKE_PREFIX_PATH=$(pwd)/../deps/build/destdir/usr/local
