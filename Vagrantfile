@@ -81,14 +81,21 @@ Vagrant.configure("2") do |config|
     libglew-dev \
     libcairo2-dev \
     libgtk-3-dev \
+    \
+    libdbus-1-dev \
+    libcurl4-gnutls-dev \
+    libssl-dev \
+    libcereal-dev \
+    libnlopt-cxx-dev \
+    libcgal-dev \
 
   SHELL
 
-  config.vm.provision "shell", name: "git_clone", inline: <<-SHELL
+  config.vm.provision "shell", name: "git_clone", privileged: false, inline: <<-SHELL
     git clone --depth 1 https://github.com/prusa3d/PrusaSlicer.git
   SHELL
 
-  config.vm.provision "shell", name: "build_deps", inline: <<-SHELL
+  config.vm.provision "shell", name: "build_deps", privileged: false, inline: <<-SHELL
     cd PrusaSlicer
     cd deps
     mkdir build
