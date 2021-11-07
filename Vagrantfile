@@ -79,6 +79,8 @@ Vagrant.configure("2") do |config|
     cmake \
     libz-dev \
     libglew-dev \
+    libcairo2-dev \
+    libgtk-3-dev \
 
   SHELL
 
