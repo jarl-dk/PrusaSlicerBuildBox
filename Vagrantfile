@@ -80,7 +80,7 @@ Vagrant.configure("2") do |config|
     libz-dev \
     libglew-dev \
     libcairo2-dev \
-    libgtk-3-dev \
+    libgtk2.0-dev \
     \
     libdbus-1-dev \
     libcurl4-gnutls-dev \
@@ -96,19 +96,19 @@ Vagrant.configure("2") do |config|
   SHELL
 
   config.vm.provision "shell", name: "build", privileged: false, inline: <<-SHELL
-    cd PrusaSlicer
-    cd deps
-    mkdir build
-    cd build
-    cmake ..
-    make
-    cd ../..
-
-
-    mkdir build
-    cd build
-    cmake .. -DSLIC3R_STATIC=1 -DSLIC3R_PCH=OFF -DCMAKE_PREFIX_PATH=$(pwd)/../deps/build/destdir/usr/local
-    make -j4
+    cd PrusaSlicer && \
+    cd deps && \
+    mkdir build && \
+    cd build && \
+    cmake .. && \
+    make && \
+    cd ../.. && \
+    \
+    mkdir build && \
+    cd build && \
+    cmake .. -DSLIC3R_STATIC=1 -DSLIC3R_PCH=OFF -DCMAKE_PREFIX_PATH=$(pwd)/../deps/build/destdir/usr/local && \
+    make -j4 && \
+    true
   SHELL
 
 end
