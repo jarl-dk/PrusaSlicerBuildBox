@@ -77,17 +77,10 @@ Vagrant.configure("2") do |config|
     build-essential \
     autoconf \
     cmake \
-    libz-dev \
-    libglew-dev \
-    libcairo2-dev \
-    libgtk2.0-dev \
+    libglu1-mesa-dev \
+    libgtk-3-dev \
     \
     libdbus-1-dev \
-    libcurl4-gnutls-dev \
-    libssl-dev \
-    libcereal-dev \
-    libnlopt-cxx-dev \
-    libcgal-dev \
 
   SHELL
 
@@ -100,13 +93,13 @@ Vagrant.configure("2") do |config|
     cd deps && \
     mkdir build && \
     cd build && \
-    cmake .. && \
+    cmake .. -DDEP_WX_GTK3=ON && \
     make && \
     cd ../.. && \
     \
     mkdir build && \
     cd build && \
-    cmake .. -DSLIC3R_STATIC=1 -DSLIC3R_PCH=OFF -DCMAKE_PREFIX_PATH=$(pwd)/../deps/build/destdir/usr/local && \
+    cmake .. -DSLIC3R_GTK=3 -DSLIC3R_STATIC=1 -DSLIC3R_PCH=OFF -DCMAKE_PREFIX_PATH=$(pwd)/../deps/build/destdir/usr/local && \
     make -j4 && \
     true
   SHELL
